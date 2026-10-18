@@ -81,7 +81,7 @@
             font-size: 1.05rem;
             color: #ff9ee2;
             font-style: italic;
-            margin-top: 15px;
+            margin-top: 5px;
         }
 
         /* Galería Polaroid Galáctica */
@@ -136,7 +136,7 @@
             font-size: 1.1rem;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+            box-shadow: 0 0 20px rgba(255, 0, 128,5);
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 10px;
         }
@@ -153,7 +153,7 @@
             background: rgba(255, 0, 128, 0.15);
             border-radius: 15px;
             border: 1px solid rgba(255, 113, 206, 0.4);
-            animation: fadeIn 0.5s ease-in-out;
+            animation: fadeIn 0.4s ease-in-out;
         }
 
         @keyframes fadeIn {
@@ -184,15 +184,15 @@
                 </div>
             </div>
 
-            <button class="btn-cosmico" onclick="mostrarSorpresa()">Descubre tu deseo 🌠</button>
+            <button class="btn-cosmico" onclick="mostrarMensajeAleatorio()">Descubre tu deseo 🌠</button>
 
             <div id="mensaje-cumple">
-                <p class="subtext">"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma." 🥂❤️</p>
+                <p class="subtext" id="texto-mensaje">Haz clic en el botón para leer una sorpresa...</p>
             </div>
         </div>
     </div>
 
-    <!-- Script de Animación Galáctica 3D -->
+    <!-- Script de Animación Galáctica y Mensajes Románticos -->
     <script>
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
@@ -257,13 +257,24 @@
 
         render();
 
-        function mostrarSorpresa() {
-            const mensaje = document.getElementById('mensaje-cumple');
-            if (mensaje.style.display === 'block') {
-                mensaje.style.display = 'none';
-            } else {
-                mensaje.style.display = 'block';
-            }
+        // Lista de mensajes románticos de cumpleaños
+        const mensajesCumple = [
+            "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
+            "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
+            "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
+            "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
+            "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\""
+        ];
+
+        function mostrarMensajeAleatorio() {
+            const contenedor = document.getElementById('mensaje-cumple');
+            const texto = document.getElementById('texto-mensaje');
+            
+            // Elegir un mensaje al azar
+            const randomMsg = mensajesCumple[Math.floor(Math.random() * mensajesCumple.length)];
+            
+            texto.innerHTML = randomMsg;
+            contenedor.style.display = 'block';
         }
     </script>
 </body>
