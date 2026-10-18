@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tu Deseo de Cumpleaños 🌠✨</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #020208;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        #galaxy-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        .content {
+            position: relative;
+            z-index: 2;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            text-align: center;
+            background: radial-gradient(circle, transparent 30%, rgba(2, 2, 8, 0.85) 90%);
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 128, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2rem;
+            background: linear-gradient(45deg, #ff71ce, #ffe600, #05ffa1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 20px;
+        }
+
+        #card-deseo {
+            margin-top: 15px;
+            padding: 35px 20px;
+            min-height: 200px;
+            background-size: cover;
+            background-position: center;
+            border-radius: 18px;
+            border: 2px solid rgba(255, 113, 206, 0.8);
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #card-deseo::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.68);
+            z-index: 1;
+        }
+
+        .texto-deseo {
+            position: relative;
+            z-index: 2;
+            font-size: 1.15rem;
+            color: #ffffff;
+            font-weight: 500;
+            line-height: 1.6;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        }
+
+        .btn-cosmico {
+            background: linear-gradient(45deg, #FF0080, #7928CA);
+            color: white;
+            border: none;
+            padding: 14px 28px;
+            font-size: 1.05rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 25px;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-cosmico:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
+        }
+
+        .btn-volver {
+            background: rgba(255, 255, 255, 0.15);
+            color: #d1d5db;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 10px 20px;
+            font-size: 0.95rem;
+            border-radius: 20px;
+            cursor: pointer;
+            margin-top: 15px;
+            text-decoration: none;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="galaxy-canvas"></canvas>
+
+    <div class="content">
+        <div class="glass-card">
+            <h1>🌠 Tu Deseo Cósmico 🌠</h1>
+
+            <div id="card-deseo">
+                <p class="texto-deseo" id="texto-deseo">Cargando tu mensaje especial...</p>
+            </div>
+
+            <button class="btn-cosmico" onclick="siguienteDeseo()">Siguiente Deseo 🎲</button>
+            <br>
+            <a href="index.html" class="btn-volver">← Volver al inicio</a>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('galaxy-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const numParticles = 900;
+        const particles = [];
+        const colors = ['#ff71ce', '#ffe600', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: (Math.random() - 0.5) * width * 2,
+                y: (Math.random() - 0.5) * height * 2,
+                z: Math.random() * width,
+                radius: Math.random() * 2.2 + 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        function render() {
+            ctx.fillStyle = 'rgba(2, 2, 8, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            const cx = width / 2;
+            const cy = height / 2;
+
+            particles.forEach(p => {
+                p.z -= 0.8;
+                if (p.z <= 0) {
+                    p.z = width;
+                    p.x = (Math.random() - 0.5) * width * 2;
+                    p.y = (Math.random() - 0.5) * height * 2;
+                }
+                const k = 250 / p.z;
+                const px = p.x * k + cx;
+                const py = p.y * k + cy;
+
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    const alpha = (1 - p.z / width);
+                    ctx.beginPath();
+                    ctx.arc(px, py, p.radius * k, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = alpha;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = p.color;
+                    ctx.fill();
+                }
+            });
+            requestAnimationFrame(render);
+        }
+        render();
+
+        const recuerdosSorpresa = [
+            {
+                texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
+                foto: "FOTO1.jpg"
+            },
+            {
+                texto: "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
+                foto: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600"
+            },
+            {
+                texto: "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
+                foto: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
+            },
+            {
+                texto: "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
+                foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"
+            },
+            {
+                texto: "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\"",
+                foto: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600"
+            }
+        ];
+
+        let indexActual = 0;
+
+        function cargarDeseo(index) {
+            const contenedor = document.getElementById('card-deseo');
+            const texto = document.getElementById('texto-deseo');
+            const item = recuerdosSorpresa[index];
+            
+            texto.innerHTML = item.texto;
+            contenedor.style.backgroundImage = `url('${item.foto}')`;
+        }
+
+        function siguienteDeseo() {
+            indexActual = (indexActual + 1) % recuerdosSorpresa.length;
+            cargarDeseo(indexActual);
+        }
+
+        // Cargar el primero al abrir
+        cargarDeseo(0);
+    </script>
+</body>
+</html>
