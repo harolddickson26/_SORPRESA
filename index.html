@@ -97,7 +97,7 @@
             background: rgba(255, 255, 255, 0.95);
             padding: 10px 10px 22px 10px;
             border-radius: 8px;
-            width: 150px;
+            width: 160px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             transform: rotate(-3deg);
             transition: all 0.4s ease;
@@ -115,7 +115,7 @@
 
         .polaroid img {
             width: 100%;
-            height: 130px;
+            height: 140px;
             object-fit: cover;
             border-radius: 4px;
         }
@@ -136,7 +136,7 @@
             font-size: 1.1rem;
             border-radius: 30px;
             cursor: pointer;
-            box-shadow: 0 0 20px rgba(255, 0, 128,5);
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
             margin-top: 10px;
         }
@@ -149,11 +149,29 @@
         #mensaje-cumple {
             display: none;
             margin-top: 20px;
-            padding: 20px;
-            background: rgba(255, 0, 128, 0.15);
+            padding: 25px 20px;
+            background-size: cover;
+            background-position: center;
             border-radius: 15px;
-            border: 1px solid rgba(255, 113, 206, 0.4);
+            border: 1px solid rgba(255, 113, 206, 0.6);
+            position: relative;
             animation: fadeIn 0.4s ease-in-out;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            overflow: hidden;
+        }
+
+        /* Capa de sombreado para garantizar legibilidad del texto sobre las fotos */
+        #mensaje-cumple::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+
+        #mensaje-cumple p {
+            position: relative;
+            z-index: 2;
         }
 
         @keyframes fadeIn {
@@ -175,12 +193,12 @@
             
             <div class="gallery">
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Pastel">
-                    <span>¡Feliz día! 🎈</span>
+                    <img src="FOTO1.jpg" alt="Nuestro foto">
+                    <span>Mi momento favorito 💖</span>
                 </div>
                 <div class="polaroid">
                     <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Celebración">
-                    <span>Te amo 💖</span>
+                    <span>¡Juntos siempre! 🎈</span>
                 </div>
             </div>
 
@@ -192,7 +210,7 @@
         </div>
     </div>
 
-    <!-- Script de Animación Galáctica y Mensajes Románticos -->
+    <!-- Script de Animación Galáctica y Mensajes -->
     <script>
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
@@ -257,23 +275,38 @@
 
         render();
 
-        // Lista de mensajes románticos de cumpleaños
-        const mensajesCumple = [
-            "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
-            "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
-            "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
-            "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
-            "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\""
+        // Lista de mensajes con fotos
+        const recuerdosSorpresa = [
+            {
+                texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
+                foto: "FOTO1.jpg"
+            },
+            {
+                texto: "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
+                foto: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600"
+            },
+            {
+                texto: "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
+                foto: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
+            },
+            {
+                texto: "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
+                foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"
+            },
+            {
+                texto: "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\"",
+                foto: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600"
+            }
         ];
 
         function mostrarMensajeAleatorio() {
             const contenedor = document.getElementById('mensaje-cumple');
             const texto = document.getElementById('texto-mensaje');
             
-            // Elegir un mensaje al azar
-            const randomMsg = mensajesCumple[Math.floor(Math.random() * mensajesCumple.length)];
+            const itemAleatorio = recuerdosSorpresa[Math.floor(Math.random() * recuerdosSorpresa.length)];
             
-            texto.innerHTML = randomMsg;
+            texto.innerHTML = itemAleatorio.texto;
+            contenedor.style.backgroundImage = `url('${itemAleatorio.foto}')`;
             contenedor.style.display = 'block';
         }
     </script>
