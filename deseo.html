@@ -46,7 +46,7 @@
             -webkit-backdrop-filter: blur(14px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             border-radius: 24px;
-            padding: 40px 30px;
+            padding: 30px 20px;
             max-width: 550px;
             width: 100%;
             box-shadow: 0 8px 32px 0 rgba(255, 0, 128, 0.3);
@@ -59,46 +59,47 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 1.8rem;
             background: linear-gradient(45deg, #ff71ce, #ffe600, #05ffa1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 20px;
         }
 
-        #card-deseo {
-            margin-top: 15px;
-            padding: 35px 20px;
-            min-height: 220px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 18px;
-            border: 2px solid rgba(255, 113, 206, 0.8);
-            position: relative;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
+        /* Marco independiente para la foto */
+        .photo-container {
+            width: 100%;
+            height: 280px;
+            border-radius: 16px;
             overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background-image 0.5s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            border: 2px solid rgba(255, 113, 206, 0.5);
+            margin-bottom: 20px;
         }
 
-        #card-deseo::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.68);
-            z-index: 1;
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+
+        /* Cuadro independiente para el mensaje debajo de la foto */
+        .message-box {
+            background: rgba(0, 0, 0, 0.6);
+            border-radius: 16px;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: inset 0 0 15px rgba(255, 0, 128, 0.2);
         }
 
         .texto-deseo {
-            position: relative;
-            z-index: 2;
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             color: #ffffff;
             font-weight: 500;
             line-height: 1.6;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
         }
 
         .btn-cosmico {
@@ -143,7 +144,13 @@
         <div class="glass-card">
             <h1>🌠 Tu Deseo Cósmico 🌠</h1>
 
-            <div id="card-deseo">
+            <!-- La foto se muestra completa arriba -->
+            <div class="photo-container">
+                <img id="img-deseo" src="FOTO2.jpg" alt="Recuerdo especial">
+            </div>
+
+            <!-- El mensaje se muestra abajo en su propio cuadro -->
+            <div class="message-box">
                 <p class="texto-deseo" id="texto-deseo">Cargando tu mensaje especial...</p>
             </div>
 
@@ -212,7 +219,7 @@
         }
         render();
 
-        // Lista de mensajes con FOTO2.jpg asignada al mensaje que pediste
+        // Cada mensaje con su respectiva foto
         const recuerdosSorpresa = [
             {
                 texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
@@ -239,12 +246,12 @@
         let indexActual = 0;
 
         function cargarDeseo(index) {
-            const contenedor = document.getElementById('card-deseo');
-            const texto = document.getElementById('texto-deseo');
+            const imgElement = document.getElementById('img-deseo');
+            const textoElement = document.getElementById('texto-deseo');
             const item = recuerdosSorpresa[index];
             
-            texto.innerHTML = item.texto;
-            contenedor.style.backgroundImage = `url('${item.foto}')`;
+            textoElement.innerHTML = item.texto;
+            imgElement.src = item.foto;
         }
 
         function siguienteDeseo() {
@@ -252,7 +259,7 @@
             cargarDeseo(indexActual);
         }
 
-        // Cargar el primer deseo al iniciar
+        // Cargar la primera imagen y deseo al abrir la página
         cargarDeseo(0);
     </script>
 </body>
