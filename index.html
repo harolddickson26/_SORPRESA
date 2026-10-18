@@ -101,3 +101,165 @@
             transform: rotate(-3deg);
             transition: all 0.4s ease;
         }
+
+        .polaroid:nth-child(even) {
+            transform: rotate(4deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 0 25px rgba(1, 205, 254, 0.8);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .polaroid span {
+            display: block;
+            margin-top: 10px;
+            font-size: 0.85rem;
+            color: #111;
+            font-weight: 600;
+        }
+
+        .btn-cosmico {
+            background: linear-gradient(45deg, #7928CA, #FF0080);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            margin-top: 15px;
+        }
+
+        .btn-cosmico:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
+        }
+
+        #mensaje-secreto {
+            display: none;
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(124, 58, 237, 0.2);
+            border-radius: 12px;
+            border: 1px solid rgba(167, 139, 250, 0.4);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Canvas para el universo 3D -->
+    <canvas id="galaxy-canvas"></canvas>
+
+    <!-- Contenido Romántico -->
+    <div class="content">
+        <div class="glass-card">
+            <h1>Eres mi universo entero 🌌✨</h1>
+            <p>Entre millones de galaxias, estrellas y posibilidades en el infinito... coincidir contigo es mi mayor suerte.</p>
+            
+            <div class="gallery">
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400" alt="Nosotros">
+                    <span>Mi estrella 🌟</span>
+                </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Recuerdo">
+                    <span>Para siempre 💫</span>
+                </div>
+            </div>
+
+            <button class="btn-cosmico" onclick="revelarMensaje()">Presiona la Estrella 💫</button>
+
+            <div id="mensaje-secreto">
+                <p class="subtext">"Si pudiera regalarte una galaxia por cada día a tu lado, el universo entero no alcanzaría." ❤️</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script de Animación Cósmica 3D (Canvas) -->
+    <script>
+        const canvas = document.getElementById('galaxy-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        // Crear partículas de la Galaxia
+        const numParticles = 800;
+        const particles = [];
+        const colors = ['#ff71ce', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: (Math.random() - 0.5) * width * 2,
+                y: (Math.random() - 0.5) * height * 2,
+                z: Math.random() * width,
+                radius: Math.random() * 2 + 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        // Animación 3D en loop
+        function render() {
+            ctx.fillStyle = 'rgba(2, 2, 8, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            const cx = width / 2;
+            const cy = height / 2;
+
+            particles.forEach(p => {
+                p.z -= 0.8; // Velocidad de movimiento hacia el espectador
+
+                if (p.z <= 0) {
+                    p.z = width;
+                    p.x = (Math.random() - 0.5) * width * 2;
+                    p.y = (Math.random() - 0.5) * height * 2;
+                }
+
+                // Proyección 3D a 2D
+                const k = 250 / p.z;
+                const px = p.x * k + cx;
+                const py = p.y * k + cy;
+
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    const alpha = (1 - p.z / width);
+                    ctx.beginPath();
+                    ctx.arc(px, py, p.radius * k, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = alpha;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = p.color;
+                    ctx.fill();
+                }
+            });
+
+            requestAnimationFrame(render);
+        }
+
+        render();
+
+        function revelarMensaje() {
+            const msg = document.getElementById('mensaje-secreto');
+            if (msg.style.display === 'block') {
+                msg.style.display = 'none';
+            } else {
+                msg.style.display = 'block';
+            }
+        }
+    </script>
+</body>
+</html>
