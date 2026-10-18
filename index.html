@@ -205,7 +205,7 @@
         }
         render();
 
-        // CAMBIA ESTA FECHA por la fecha correcta (Año-Mes-Día)
+        // FECHA CONFIGURADA: 11 de septiembre de 2026
         const FECHA_CORRECTA = "2026-09-11"; 
 
         function validarFecha() {
@@ -213,7 +213,7 @@
             const errorMsg = document.getElementById('error-msg');
 
             if (fechaIngresada === FECHA_CORRECTA) {
-                // Al ser correcta, abre la tarjeta de cumpleaños
+                // Al ingresar 11/09/2026 pasa a la tarjeta de cumpleaños
                 window.location.href = "cumple.html";
             } else {
                 errorMsg.style.display = "block";
