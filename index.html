@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tu Deseo de Cumpleaños 🌠✨</title>
+    <title>¡Feliz Cumpleaños, Mi Amor! 🎂🌌</title>
     <style>
         * {
             margin: 0;
@@ -18,6 +18,7 @@
             overflow-x: hidden;
         }
 
+        /* Canvas 3D de fondo */
         #galaxy-canvas {
             position: fixed;
             top: 0;
@@ -27,6 +28,7 @@
             z-index: 1;
         }
 
+        /* Capa de contenido por encima */
         .content {
             position: relative;
             z-index: 2;
@@ -37,19 +39,20 @@
             justify-content: center;
             padding: 20px;
             text-align: center;
-            background: radial-gradient(circle, transparent 30%, rgba(2, 2, 8, 0.85) 90%);
+            background: radial-gradient(circle, transparent 40%, rgba(2, 2, 8, 0.85) 90%);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 24px;
             padding: 40px 30px;
             max-width: 550px;
             width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(255, 0, 128, 0.3);
+            box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.3);
+            margin-bottom: 20px;
             animation: float 4s ease-in-out infinite;
         }
 
@@ -59,54 +62,71 @@
         }
 
         h1 {
-            font-size: 2rem;
+            font-size: 2.2rem;
             background: linear-gradient(45deg, #ff71ce, #ffe600, #05ffa1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 113, 206, 0.4);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #d1d5db;
             margin-bottom: 20px;
         }
 
-        #card-deseo {
-            margin-top: 15px;
-            padding: 35px 20px;
-            min-height: 220px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 18px;
-            border: 2px solid rgba(255, 113, 206, 0.8);
-            position: relative;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-            overflow: hidden;
+        /* Galería Polaroid Galáctica */
+        .gallery {
             display: flex;
-            align-items: center;
             justify-content: center;
-            transition: background-image 0.5s ease-in-out;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 20px;
         }
 
-        #card-deseo::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.68);
-            z-index: 1;
+        .polaroid {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 10px 22px 10px;
+            border-radius: 8px;
+            width: 160px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+            transform: rotate(-3deg);
+            transition: all 0.4s ease;
         }
 
-        .texto-deseo {
-            position: relative;
-            z-index: 2;
-            font-size: 1.15rem;
-            color: #ffffff;
-            font-weight: 500;
-            line-height: 1.6;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+        .polaroid:nth-child(even) {
+            transform: rotate(4deg);
+        }
+
+        .polaroid:hover {
+            transform: scale(1.1) rotate(0deg);
+            z-index: 10;
+            box-shadow: 0 0 25px rgba(255, 230, 0, 0.8);
+        }
+
+        .polaroid img {
+            width: 100%;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 4px;
+        }
+
+        .polaroid span {
+            display: block;
+            margin-top: 8px;
+            font-size: 0.85rem;
+            color: #111;
+            font-weight: 600;
         }
 
         .btn-cosmico {
             background: linear-gradient(45deg, #FF0080, #7928CA);
             color: white;
             border: none;
-            padding: 14px 28px;
-            font-size: 1.05rem;
+            padding: 14px 30px;
+            font-size: 1.1rem;
             border-radius: 30px;
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
@@ -120,39 +140,36 @@
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
         }
-
-        .btn-volver {
-            background: rgba(255, 255, 255, 0.15);
-            color: #d1d5db;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 10px 20px;
-            font-size: 0.95rem;
-            border-radius: 20px;
-            cursor: pointer;
-            margin-top: 15px;
-            text-decoration: none;
-            display: inline-block;
-        }
     </style>
 </head>
 <body>
 
+    <!-- Canvas para la galaxia de fondo -->
     <canvas id="galaxy-canvas"></canvas>
 
+    <!-- Contenido de Cumpleaños -->
     <div class="content">
         <div class="glass-card">
-            <h1>🌠 Tu Deseo Cósmico 🌠</h1>
-
-            <div id="card-deseo">
-                <p class="texto-deseo" id="texto-deseo">Cargando tu mensaje especial...</p>
+            <h1>¡Feliz Cumpleaños, Mi Amor! 🎂✨</h1>
+            <p>Hoy el universo está de fiesta porque cumple años la persona más maravillosa que ilumina todos mis días.</p>
+            
+            <div class="gallery">
+                <div class="polaroid">
+                    <img src="FOTO1.jpg" alt="Nuestro beso">
+                    <span>Mi momento favorito 💖</span>
+                </div>
+                <div class="polaroid">
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Celebración">
+                    <span>¡Juntos siempre! 🎈</span>
+                </div>
             </div>
 
-            <button class="btn-cosmico" onclick="siguienteDeseo()">Siguiente Deseo 🎲</button>
-            <br>
-            <a href="index.html" class="btn-volver">← Volver al inicio</a>
+            <!-- Botón que redirige a deseo.html -->
+            <a href="deseo.html" class="btn-cosmico">Descubre tu deseo 🌠</a>
         </div>
     </div>
 
+    <!-- Script de Animación Galáctica -->
     <script>
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
@@ -165,6 +182,7 @@
             height = canvas.height = window.innerHeight;
         });
 
+        // Crear partículas estelares
         const numParticles = 900;
         const particles = [];
         const colors = ['#ff71ce', '#ffe600', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
@@ -188,11 +206,13 @@
 
             particles.forEach(p => {
                 p.z -= 0.8;
+
                 if (p.z <= 0) {
                     p.z = width;
                     p.x = (Math.random() - 0.5) * width * 2;
                     p.y = (Math.random() - 0.5) * height * 2;
                 }
+
                 const k = 250 / p.z;
                 const px = p.x * k + cx;
                 const py = p.y * k + cy;
@@ -208,52 +228,11 @@
                     ctx.fill();
                 }
             });
+
             requestAnimationFrame(render);
         }
+
         render();
-
-        // Lista de mensajes con FOTO2.jpg asignada al mensaje que pediste
-        const recuerdosSorpresa = [
-            {
-                texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
-                foto: "FOTO2.jpg"
-            },
-            {
-                texto: "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
-                foto: "FOTO1.jpg"
-            },
-            {
-                texto: "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
-                foto: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
-            },
-            {
-                texto: "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
-                foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"
-            },
-            {
-                texto: "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\"",
-                foto: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600"
-            }
-        ];
-
-        let indexActual = 0;
-
-        function cargarDeseo(index) {
-            const contenedor = document.getElementById('card-deseo');
-            const texto = document.getElementById('texto-deseo');
-            const item = recuerdosSorpresa[index];
-            
-            texto.innerHTML = item.texto;
-            contenedor.style.backgroundImage = `url('${item.foto}')`;
-        }
-
-        function siguienteDeseo() {
-            indexActual = (indexActual + 1) % recuerdosSorpresa.length;
-            cargarDeseo(indexActual);
-        }
-
-        // Cargar el primer deseo al iniciar
-        cargarDeseo(0);
     </script>
 </body>
 </html>
