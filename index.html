@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Una Sorpresa Especial 🔒💖</title>
+    <title>Nuestra Historia 🔒💖</title>
     <style>
         * {
             margin: 0;
@@ -72,8 +72,8 @@
 
         p {
             color: #d1d5db;
-            font-size: 1rem;
-            line-height: 1.5;
+            font-size: 1.05rem;
+            line-height: 1.6;
             margin-bottom: 25px;
         }
 
@@ -133,15 +133,15 @@
     <div class="container">
         <div class="glass-card">
             <div class="lock-icon">🔒✨</div>
-            <h1>Acceso Restringido</h1>
-            <p>Ingresa la fecha especial para desbloquear tu regalo de cumpleaños ❤️</p>
+            <h1>Un Momento Especial</h1>
+            <p>Ingresa nuestra fecha especial... El día en que tú y yo nos volvimos uno ❤️</p>
 
             <div class="input-group">
                 <input type="date" id="fecha-input">
             </div>
 
             <button class="btn-cosmico" onclick="validarFecha()">Desbloquear Sorpresa 🗝️</button>
-            <div id="error-msg">Fecha incorrecta... ¡Piensa bien mi amor! 💖</div>
+            <div id="error-msg">Esa no es la fecha mi amor... ¡Piensa bien! 💖</div>
         </div>
     </div>
 
@@ -213,7 +213,6 @@
             const errorMsg = document.getElementById('error-msg');
 
             if (fechaIngresada === FECHA_CORRECTA) {
-                // Redirige a la tarjeta de cumpleaños
                 window.location.href = "cumple.html";
             } else {
                 errorMsg.style.display = "block";
