@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Una Sorpresa Especial 🔒💖</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: #020208;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow: hidden;
+        }
+
+        #galaxy-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        .container {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+        }
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 24px;
+            padding: 40px 25px;
+            box-shadow: 0 8px 32px 0 rgba(255, 0, 128, 0.3);
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-8px); }
+        }
+
+        .lock-icon {
+            font-size: 3.2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(45deg, #ff71ce, #ffe600, #05ffa1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 12px;
+        }
+
+        p {
+            color: #d1d5db;
+            font-size: 1rem;
+            line-height: 1.5;
+            margin-bottom: 25px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input[type="date"] {
+            width: 100%;
+            padding: 14px 18px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 113, 206, 0.5);
+            background: rgba(0, 0, 0, 0.5);
+            color: #ffffff;
+            font-size: 1.1rem;
+            text-align: center;
+            outline: none;
+        }
+
+        input:focus {
+            border-color: #ff71ce;
+            box-shadow: 0 0 15px rgba(255, 113, 206, 0.6);
+        }
+
+        .btn-cosmico {
+            background: linear-gradient(45deg, #FF0080, #7928CA);
+            color: white;
+            border: none;
+            padding: 14px 35px;
+            font-size: 1.1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
+            transition: transform 0.2s, box-shadow 0.2s;
+            width: 100%;
+            font-weight: 600;
+        }
+
+        .btn-cosmico:hover {
+            transform: scale(1.03);
+            box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
+        }
+
+        #error-msg {
+            color: #ff4757;
+            font-size: 0.95rem;
+            margin-top: 15px;
+            display: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="galaxy-canvas"></canvas>
+
+    <div class="container">
+        <div class="glass-card">
+            <div class="lock-icon">🔒✨</div>
+            <h1>Acceso Restringido</h1>
+            <p>Ingresa la fecha especial para desbloquear tu regalo de cumpleaños ❤️</p>
+
+            <div class="input-group">
+                <input type="date" id="fecha-input">
+            </div>
+
+            <button class="btn-cosmico" onclick="validarFecha()">Desbloquear Sorpresa 🗝️</button>
+            <div id="error-msg">Fecha incorrecta... ¡Piensa bien mi amor! 💖</div>
+        </div>
+    </div>
+
+    <script>
+        // Animación de Galaxia 3D
+        const canvas = document.getElementById('galaxy-canvas');
+        const ctx = canvas.getContext('2d');
+
+        let width = canvas.width = window.innerWidth;
+        let height = canvas.height = window.innerHeight;
+
+        window.addEventListener('resize', () => {
+            width = canvas.width = window.innerWidth;
+            height = canvas.height = window.innerHeight;
+        });
+
+        const numParticles = 800;
+        const particles = [];
+        const colors = ['#ff71ce', '#ffe600', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
+
+        for (let i = 0; i < numParticles; i++) {
+            particles.push({
+                x: (Math.random() - 0.5) * width * 2,
+                y: (Math.random() - 0.5) * height * 2,
+                z: Math.random() * width,
+                radius: Math.random() * 2.2 + 0.5,
+                color: colors[Math.floor(Math.random() * colors.length)]
+            });
+        }
+
+        function render() {
+            ctx.fillStyle = 'rgba(2, 2, 8, 0.2)';
+            ctx.fillRect(0, 0, width, height);
+
+            const cx = width / 2;
+            const cy = height / 2;
+
+            particles.forEach(p => {
+                p.z -= 0.8;
+                if (p.z <= 0) {
+                    p.z = width;
+                    p.x = (Math.random() - 0.5) * width * 2;
+                    p.y = (Math.random() - 0.5) * height * 2;
+                }
+                const k = 250 / p.z;
+                const px = p.x * k + cx;
+                const py = p.y * k + cy;
+
+                if (px >= 0 && px <= width && py >= 0 && py <= height) {
+                    const alpha = (1 - p.z / width);
+                    ctx.beginPath();
+                    ctx.arc(px, py, p.radius * k, 0, Math.PI * 2);
+                    ctx.fillStyle = p.color;
+                    ctx.globalAlpha = alpha;
+                    ctx.shadowBlur = 12;
+                    ctx.shadowColor = p.color;
+                    ctx.fill();
+                }
+            });
+            requestAnimationFrame(render);
+        }
+        render();
+
+        // CAMBIA ESTA FECHA por la fecha correcta (Año-Mes-Día)
+        const FECHA_CORRECTA = "2026-09-11"; 
+
+        function validarFecha() {
+            const fechaIngresada = document.getElementById('fecha-input').value;
+            const errorMsg = document.getElementById('error-msg');
+
+            if (fechaIngresada === FECHA_CORRECTA) {
+                // Al ser correcta, la envía a la página principal intacta
+                window.location.href = "index.html";
+            } else {
+                errorMsg.style.display = "block";
+            }
+        }
+    </script>
+</body>
+</html>
