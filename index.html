@@ -3,148 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para el amor de mi vida 💖</title>
+    <title>Para mi universo entero 🌌✨</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+            background-color: #020208;
+            color: #ffffff;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Canvas 3D de fondo */
+        #galaxy-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 1;
+        }
+
+        /* Capa de contenido por encima */
+        .content {
+            position: relative;
+            z-index: 2;
             min-height: 100vh;
             display: flex;
             flex-direction: column;
             align-items: center;
-            font-family: 'Arial', sans-serif;
-            margin: 0;
+            justify-content: center;
             padding: 20px;
-        }
-        .container {
-            max-width: 600px;
-            width: 100%;
             text-align: center;
+            background: radial-gradient(circle, transparent 40%, rgba(2, 2, 8, 0.8) 90%);
         }
-        .card {
-            background: white;
-            padding: 30px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+
+        .glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 24px;
+            padding: 40px 30px;
+            max-width: 550px;
+            width: 100%;
+            box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.25);
+            margin-bottom: 30px;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        h1 {
+            font-size: 2.2rem;
+            background: linear-gradient(45deg, #ff71ce, #01cdfe, #05ffa1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 15px;
+            text-shadow: 0 0 20px rgba(255, 113, 206, 0.3);
+        }
+
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: #d1d5db;
             margin-bottom: 20px;
         }
-        h1 { color: #ff4757; margin-top: 0; }
-        p { color: #555; font-size: 1.1rem; line-height: 1.6; }
-        .heart { font-size: 50px; animation: latir 1s infinite alternate; }
-        @keyframes latir { from { transform: scale(1); } to { transform: scale(1.2); } }
-        
-        /* Galería estilo Polaroid */
+
+        .subtext {
+            font-size: 0.95rem;
+            color: #a78bfa;
+            font-style: italic;
+        }
+
+        /* Galería Polaroid Galáctica */
         .gallery {
             display: flex;
             justify-content: center;
-            gap: 15px;
+            gap: 20px;
             flex-wrap: wrap;
-            margin: 20px 0;
+            margin-top: 25px;
         }
+
         .polaroid {
-            background: white;
-            padding: 10px 10px 25px 10px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-            width: 140px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 12px 12px 20px 12px;
+            border-radius: 8px;
+            width: 150px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.5);
             transform: rotate(-3deg);
-            transition: transform 0.3s;
+            transition: all 0.4s ease;
         }
-        .polaroid:nth-child(even) { transform: rotate(3deg); }
-        .polaroid:hover { transform: scale(1.05); z-index: 10; }
-        .polaroid img { width: 100%; height: 120px; object-fit: cover; border-radius: 4px; }
-        .polaroid span { display: block; margin-top: 8px; font-size: 0.9rem; color: #333; font-family: cursive; }
-
-        /* Ruleta */
-        .roulette-box {
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
-        #result {
-            font-size: 1.3rem;
-            font-weight: bold;
-            color: #e91e63;
-            margin: 15px 0;
-            min-height: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        button.spin-btn {
-            background: #ff4757;
-            color: white;
-            border: none;
-            padding: 12px 25px;
-            font-size: 1.1rem;
-            border-radius: 25px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(255,71,87,0.4);
-            transition: background 0.2s;
-        }
-        button.spin-btn:hover { background: #ff3344; }
-    </style>
-</head>
-<body>
-
-    <div class="container">
-        <!-- Sección de Bienvenida -->
-        <div class="card">
-            <div class="heart">💖</div>
-            <h1>¡Sorpresa, mi amor!</h1>
-            <p>Hice esta pequeña página web solo para recordarte lo mucho que te amo, lo especial que eres y para planear nuestra próxima gran aventura juntos.</p>
-        </div>
-
-        <!-- Sección de Fotos / Recuerdos -->
-        <div class="card">
-            <h2>Nuestros Momentos</h2>
-            <div class="gallery">
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=300" alt="Recuerdo">
-                    <span>Te amo 🤍</span>
-                </div>
-                <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=300" alt="Recuerdo">
-                    <span>Mi favorita</span>
-                </div>
-            </div>
-        </div>
-
-        <!-- Ruleta para la próxima cita -->
-        <div class="roulette-box">
-            <h2>🎰 Ruleta de nuestra próxima cita</h2>
-            <p>Gira la ruleta para decidir qué haremos en nuestra siguiente salida:</p>
-            <div id="result">¡Presiona el botón para girar! ✨</div>
-            <button class="spin-btn" onclick="girarRuleta()">Girar Ruleta 🎲</button>
-        </div>
-    </div>
-
-    <script>
-        const opcionesCita = [
-            "Cena romántica a la luz de las velas 🍷",
-            "Tarde de pelis, cobija y palomitas 🍿",
-            "Picnic al aire libre y atardecer 🧺",
-            "Noche de helados y paseo nocturno 🍦",
-            "Salida de compras y antojos juntos 🛍️",
-            "Cita sorpresa organizada por mí 🤫"
-        ];
-
-        function girarRuleta() {
-            const resultDiv = document.getElementById("result");
-            resultDiv.innerHTML = "Girando la ruleta... 🌀";
-            
-            let counter = 0;
-            const interval = setInterval(() => {
-                const randomIndex = Math.floor(Math.random() * opcionesCita.length);
-                resultDiv.innerHTML = opcionesCita[randomIndex];
-                counter++;
-                if (counter > 15) {
-                    clearInterval(interval);
-                    const finalIndex = Math.floor(Math.random() * opcionesCita.length);
-                    resultDiv.innerHTML = "🎉 ¡Ganó: " + opcionesCita[finalIndex] + " ! 🎉";
-                }
-            }, 100);
-        }
-    </script>
-
-</body>
-</html>
