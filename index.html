@@ -78,10 +78,11 @@
         }
 
         .subtext {
-            font-size: 1.05rem;
-            color: #ff9ee2;
-            font-style: italic;
-            margin-top: 5px;
+            font-size: 1.1rem;
+            color: #ffffff;
+            font-weight: 500;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            line-height: 1.5;
         }
 
         /* Galería Polaroid Galáctica */
@@ -149,23 +150,24 @@
         #mensaje-cumple {
             display: none;
             margin-top: 20px;
-            padding: 25px 20px;
+            padding: 35px 20px;
+            min-height: 160px;
             background-size: cover;
             background-position: center;
             border-radius: 15px;
-            border: 1px solid rgba(255, 113, 206, 0.6);
+            border: 2px solid rgba(255, 113, 206, 0.8);
             position: relative;
             animation: fadeIn 0.4s ease-in-out;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
             overflow: hidden;
         }
 
-        /* Capa de sombreado para garantizar legibilidad del texto sobre las fotos */
+        /* Capa oscura translúcida para que el texto resalte perfectamente sobre la foto */
         #mensaje-cumple::before {
             content: '';
             position: absolute;
             top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.7);
+            background: rgba(0, 0, 0, 0.65);
             z-index: 1;
         }
 
@@ -193,7 +195,7 @@
             
             <div class="gallery">
                 <div class="polaroid">
-                    <img src="FOTO1.jpg" alt="Nuestro beso">
+                    <img src="FOTO1.JPG" alt="Nuestro beso">
                     <span>Mi momento favorito 💖</span>
                 </div>
                 <div class="polaroid">
@@ -275,11 +277,11 @@
 
         render();
 
-        // Lista de mensajes con fotos (incluyendo tu FOTO1.jpg)
+        // Lista de mensajes con tu FOTO1.JPG como fondo en uno de ellos
         const recuerdosSorpresa = [
             {
                 texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
-                foto: "FOTO1.jpg"
+                foto: "FOTO1.JPG"
             },
             {
                 texto: "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
