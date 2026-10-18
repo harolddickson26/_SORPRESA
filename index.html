@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Para mi universo entero 🌌✨</title>
+    <title>¡Feliz Cumpleaños, Mi Amor! 🎂🌌</title>
     <style>
         * {
             margin: 0;
@@ -39,20 +39,20 @@
             justify-content: center;
             padding: 20px;
             text-align: center;
-            background: radial-gradient(circle, transparent 40%, rgba(2, 2, 8, 0.8) 90%);
+            background: radial-gradient(circle, transparent 40%, rgba(2, 2, 8, 0.85) 90%);
         }
 
         .glass-card {
             background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
             border: 1px solid rgba(255, 255, 255, 0.18);
             border-radius: 24px;
             padding: 40px 30px;
             max-width: 550px;
             width: 100%;
-            box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.25);
-            margin-bottom: 30px;
+            box-shadow: 0 8px 32px 0 rgba(138, 43, 226, 0.3);
+            margin-bottom: 20px;
             animation: float 4s ease-in-out infinite;
         }
 
@@ -63,11 +63,11 @@
 
         h1 {
             font-size: 2.2rem;
-            background: linear-gradient(45deg, #ff71ce, #01cdfe, #05ffa1);
+            background: linear-gradient(45deg, #ff71ce, #ffe600, #05ffa1);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             margin-bottom: 15px;
-            text-shadow: 0 0 20px rgba(255, 113, 206, 0.3);
+            text-shadow: 0 0 20px rgba(255, 113, 206, 0.4);
         }
 
         p {
@@ -78,9 +78,10 @@
         }
 
         .subtext {
-            font-size: 0.95rem;
-            color: #a78bfa;
+            font-size: 1.05rem;
+            color: #ff9ee2;
             font-style: italic;
+            margin-top: 15px;
         }
 
         /* Galería Polaroid Galáctica */
@@ -89,12 +90,12 @@
             justify-content: center;
             gap: 20px;
             flex-wrap: wrap;
-            margin-top: 25px;
+            margin-top: 20px;
         }
 
         .polaroid {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 12px 12px 20px 12px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 10px 10px 22px 10px;
             border-radius: 8px;
             width: 150px;
             box-shadow: 0 10px 20px rgba(0,0,0,0.5);
@@ -109,7 +110,7 @@
         .polaroid:hover {
             transform: scale(1.1) rotate(0deg);
             z-index: 10;
-            box-shadow: 0 0 25px rgba(1, 205, 254, 0.8);
+            box-shadow: 0 0 25px rgba(255, 230, 0, 0.8);
         }
 
         .polaroid img {
@@ -121,14 +122,14 @@
 
         .polaroid span {
             display: block;
-            margin-top: 10px;
+            margin-top: 8px;
             font-size: 0.85rem;
             color: #111;
             font-weight: 600;
         }
 
         .btn-cosmico {
-            background: linear-gradient(45deg, #7928CA, #FF0080);
+            background: linear-gradient(45deg, #FF0080, #7928CA);
             color: white;
             border: none;
             padding: 14px 30px;
@@ -137,7 +138,7 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 15px;
+            margin-top: 10px;
         }
 
         .btn-cosmico:hover {
@@ -145,47 +146,53 @@
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
         }
 
-        #mensaje-secreto {
+        #mensaje-cumple {
             display: none;
             margin-top: 20px;
-            padding: 15px;
-            background: rgba(124, 58, 237, 0.2);
-            border-radius: 12px;
-            border: 1px solid rgba(167, 139, 250, 0.4);
+            padding: 20px;
+            background: rgba(255, 0, 128, 0.15);
+            border-radius: 15px;
+            border: 1px solid rgba(255, 113, 206, 0.4);
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Canvas para el universo 3D -->
+    <!-- Canvas para la galaxia de fondo -->
     <canvas id="galaxy-canvas"></canvas>
 
-    <!-- Contenido Romántico -->
+    <!-- Contenido de Cumpleaños -->
     <div class="content">
         <div class="glass-card">
-            <h1>Eres mi universo entero 🌌✨</h1>
-            <p>Entre millones de galaxias, estrellas y posibilidades en el infinito... coincidir contigo es mi mayor suerte.</p>
+            <h1>¡Feliz Cumpleaños, Mi Amor! 🎂✨</h1>
+            <p>Hoy el universo está de fiesta porque cumple años la persona más maravillosa que ilumina todos mis días.</p>
             
             <div class="gallery">
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?w=400" alt="Nosotros">
-                    <span>Mi estrella 🌟</span>
+                    <img src="https://images.unsplash.com/photo-1513151233558-d860c5398176?w=400" alt="Pastel">
+                    <span>¡Feliz día! 🎈</span>
                 </div>
                 <div class="polaroid">
-                    <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=400" alt="Recuerdo">
-                    <span>Para siempre 💫</span>
+                    <img src="https://images.unsplash.com/photo-1530103862676-de8c9debad1d?w=400" alt="Celebración">
+                    <span>Te amo 💖</span>
                 </div>
             </div>
 
-            <button class="btn-cosmico" onclick="revelarMensaje()">Presiona la Estrella 💫</button>
+            <button class="btn-cosmico" onclick="mostrarSorpresa()">Descubre tu deseo 🌠</button>
 
-            <div id="mensaje-secreto">
-                <p class="subtext">"Si pudiera regalarte una galaxia por cada día a tu lado, el universo entero no alcanzaría." ❤️</p>
+            <div id="mensaje-cumple">
+                <p class="subtext">"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma." 🥂❤️</p>
             </div>
         </div>
     </div>
 
-    <!-- Script de Animación Cósmica 3D (Canvas) -->
+    <!-- Script de Animación Galáctica 3D -->
     <script>
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
@@ -198,22 +205,21 @@
             height = canvas.height = window.innerHeight;
         });
 
-        // Crear partículas de la Galaxia
-        const numParticles = 800;
+        // Crear partículas estelares
+        const numParticles = 900;
         const particles = [];
-        const colors = ['#ff71ce', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
+        const colors = ['#ff71ce', '#ffe600', '#01cdfe', '#05ffa1', '#b967ff', '#fff'];
 
         for (let i = 0; i < numParticles; i++) {
             particles.push({
                 x: (Math.random() - 0.5) * width * 2,
                 y: (Math.random() - 0.5) * height * 2,
                 z: Math.random() * width,
-                radius: Math.random() * 2 + 0.5,
+                radius: Math.random() * 2.2 + 0.5,
                 color: colors[Math.floor(Math.random() * colors.length)]
             });
         }
 
-        // Animación 3D en loop
         function render() {
             ctx.fillStyle = 'rgba(2, 2, 8, 0.2)';
             ctx.fillRect(0, 0, width, height);
@@ -222,7 +228,7 @@
             const cy = height / 2;
 
             particles.forEach(p => {
-                p.z -= 0.8; // Velocidad de movimiento hacia el espectador
+                p.z -= 0.8;
 
                 if (p.z <= 0) {
                     p.z = width;
@@ -230,7 +236,6 @@
                     p.y = (Math.random() - 0.5) * height * 2;
                 }
 
-                // Proyección 3D a 2D
                 const k = 250 / p.z;
                 const px = p.x * k + cx;
                 const py = p.y * k + cy;
@@ -252,12 +257,12 @@
 
         render();
 
-        function revelarMensaje() {
-            const msg = document.getElementById('mensaje-secreto');
-            if (msg.style.display === 'block') {
-                msg.style.display = 'none';
+        function mostrarSorpresa() {
+            const mensaje = document.getElementById('mensaje-cumple');
+            if (mensaje.style.display === 'block') {
+                mensaje.style.display = 'none';
             } else {
-                msg.style.display = 'block';
+                mensaje.style.display = 'block';
             }
         }
     </script>
