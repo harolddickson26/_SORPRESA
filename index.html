@@ -77,14 +77,6 @@
             margin-bottom: 20px;
         }
 
-        .subtext {
-            font-size: 1.1rem;
-            color: #ffffff;
-            font-weight: 500;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            line-height: 1.5;
-        }
-
         /* Galería Polaroid Galáctica */
         .gallery {
             display: flex;
@@ -139,46 +131,14 @@
             cursor: pointer;
             box-shadow: 0 0 20px rgba(255, 0, 128, 0.5);
             transition: transform 0.2s, box-shadow 0.2s;
-            margin-top: 10px;
+            margin-top: 25px;
+            text-decoration: none;
+            display: inline-block;
         }
 
         .btn-cosmico:hover {
             transform: scale(1.05);
             box-shadow: 0 0 30px rgba(255, 0, 128, 0.8);
-        }
-
-        #mensaje-cumple {
-            display: none;
-            margin-top: 20px;
-            padding: 35px 20px;
-            min-height: 160px;
-            background-size: cover;
-            background-position: center;
-            border-radius: 15px;
-            border: 2px solid rgba(255, 113, 206, 0.8);
-            position: relative;
-            animation: fadeIn 0.4s ease-in-out;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.6);
-            overflow: hidden;
-        }
-
-        /* Capa oscura translúcida para que el texto resalte perfectamente */
-        #mensaje-cumple::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0, 0, 0, 0.65);
-            z-index: 1;
-        }
-
-        #mensaje-cumple p {
-            position: relative;
-            z-index: 2;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
@@ -204,15 +164,12 @@
                 </div>
             </div>
 
-            <button class="btn-cosmico" onclick="mostrarMensajeAleatorio()">Descubre tu deseo 🌠</button>
-
-            <div id="mensaje-cumple">
-                <p class="subtext" id="texto-mensaje">Haz clic en el botón para leer una sorpresa...</p>
-            </div>
+            <!-- Botón que redirige a deseo.html -->
+            <a href="deseo.html" class="btn-cosmico">Descubre tu deseo 🌠</a>
         </div>
     </div>
 
-    <!-- Script de Animación Galáctica y Mensajes -->
+    <!-- Script de Animación Galáctica -->
     <script>
         const canvas = document.getElementById('galaxy-canvas');
         const ctx = canvas.getContext('2d');
@@ -276,41 +233,6 @@
         }
 
         render();
-
-        // Lista de mensajes con FOTO1.jpg
-        const recuerdosSorpresa = [
-            {
-                texto: "\"Verte sonreír es mi regalo favorito, pero hoy el regalo es para el mundo por tenerte. ¡Feliz cumpleaños al amor de mi vida! ✨\"",
-                foto: "FOTO1.jpg"
-            },
-            {
-                texto: "\"Deseo que este nuevo año de vida te traiga tanta felicidad como la que tú le regalas a mi vida todos los días. ¡Que cumplas muchos más a mi lado! Te amo con el alma.\" 🥂❤️",
-                foto: "https://images.unsplash.com/photo-1511919884226-fd3cad34687c?w=600"
-            },
-            {
-                texto: "\"Que cada estrella de esta galaxia te guarde y te cuide en este nuevo año. Gracias por ser mi compañera de aventuras y mi paz. 🌌💖\"",
-                foto: "https://images.unsplash.com/photo-1506744038136-46273834b3fb?w=600"
-            },
-            {
-                texto: "\"Brindo por ti, por tus sueños, por tus risas y por todos los años que nos faltan por celebrar juntos. ¡Te amo muchísimo! 🎂🎉\"",
-                foto: "https://images.unsplash.com/photo-1517841905240-472988babdf9?w=600"
-            },
-            {
-                texto: "\"Eres la casualidad más hermosa de mi universo. Que este cumpleaños esté lleno de momentos mágicos y mucho amor. 💫💘\"",
-                foto: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600"
-            }
-        ];
-
-        function mostrarMensajeAleatorio() {
-            const contenedor = document.getElementById('mensaje-cumple');
-            const texto = document.getElementById('texto-mensaje');
-            
-            const itemAleatorio = recuerdosSorpresa[Math.floor(Math.random() * recuerdosSorpresa.length)];
-            
-            texto.innerHTML = itemAleatorio.texto;
-            contenedor.style.backgroundImage = `url('${itemAleatorio.foto}')`;
-            contenedor.style.display = 'block';
-        }
     </script>
 </body>
 </html>
